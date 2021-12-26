@@ -5,7 +5,7 @@ import youtube_dl
 class music(commands.Cog):
   def __init__(self, client):
     self.client = client
-    self.queue = []
+    self.queue = {}
 
   @commands.command()
   async def join(self, ctx):
@@ -32,7 +32,7 @@ class music(commands.Cog):
       info = ydl.extract_info(url, download=False)
       url2 = info['formats'][0]['url']
       source = await discord.FFmpegOpusAudio.from_probe(url2, **FFMPEG_OPTIONS)
-      
+
       vc.play(source)
 
   @commands.command()
